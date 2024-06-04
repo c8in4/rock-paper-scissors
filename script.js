@@ -11,24 +11,29 @@ function getRandomChoice() {
             return "Scissors";
     }
 };
-
 console.log(`Computer's choice: ${computerChoice}`);
 
-// get user input ///////////////////////////////////
-// IMPORTANT
-// IMPORTANT what if user types in some bs?
-// IMPORTANT
-let userChoice = prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
-userChoice != null ? getUserChoice(userChoice): console.warn("user canceled");
 
-function getUserChoice(userInput) {
-    userInput = userInput.replace(" ", "");
-    userInput.toLowerCase();
+// get user input ///////////////////////////////////
+let userChoice = "";
+
+getUserChoice();
+
+function getUserChoice() {
+    userChoice = prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
+    checkUserChoice(userChoice);
+    // userChoice != null ? checkUserChoice(userChoice) : console.info("user canceled");
+}
+
+function checkUserChoice(userInput) {
+    userInput = userInput.replaceAll(" ", "").toLowerCase();
+
     while (userInput != "rock"
         && userInput != "paper"
         && userInput != "scissors"
     ) {
         userInput = prompt("Please choose from 'Rock', 'Paper' and 'Scissors' only.").toLowerCase();
+        userInput = userInput.replace(" ", "").toLowerCase();
     }
 
     switch (userInput) {
@@ -70,7 +75,7 @@ function playRound(user, pc) {
         // draw
         alert(`That was a draw.\nYou both choose ${user}.`);
     } else {
-        console.warn("nobody won and on draw?\nprobably user canned");
+        console.warn("nobody won and no draw?\nprobably user canned");
     }
 
     // alert score?
