@@ -1,6 +1,25 @@
-// get computer RANDOM choice ////////////////////////
-let computerChoice = getRandomChoice();
+let computerChoice = "";
+let userChoice = "";
 
+let computerScore = 0;
+let userScore = 0;
+
+playRound();
+
+function playRound() {
+    computerChoice = getRandomChoice();
+    console.log(`Computer's choice: ${computerChoice}`);
+
+    userChoice = getUserChoice();
+    checkUserChoice(userChoice);
+    console.log(`User's choice: ${userChoice}`);
+
+    compareChoices(userChoice, computerChoice);
+
+    showScore();
+}
+
+// RANDOM choice /////////////////////////////////////
 function getRandomChoice() {
     switch (Math.floor(Math.random() * 3)) {
         case 0:
@@ -11,32 +30,24 @@ function getRandomChoice() {
             return "Scissors";
     }
 };
-console.log(`Computer's choice: ${computerChoice}`);
-
 
 // get user input ///////////////////////////////////
-let userChoice = "";
-
-getUserChoice();
-
 function getUserChoice() {
-    userChoice = prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
-    checkUserChoice(userChoice);
-    // userChoice != null ? checkUserChoice(userChoice) : console.info("user canceled");
+    return prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
 }
 
-function checkUserChoice(userInput) {
-    userInput = userInput.replaceAll(" ", "").toLowerCase();
+function checkUserChoice(input) {
+    input = input.replaceAll(" ", "").toLowerCase();        // try - catch?
 
-    while (userInput != "rock"
-        && userInput != "paper"
-        && userInput != "scissors"
+    while (input != "rock"
+        && input != "paper"
+        && input != "scissors"
     ) {
-        userInput = prompt("Please choose from 'Rock', 'Paper' and 'Scissors' only.").toLowerCase();
-        userInput = userInput.replace(" ", "").toLowerCase();
+        input = prompt("Please choose from 'Rock', 'Paper' and 'Scissors' only.");
+        input = input.replaceAll(" ", "").toLowerCase();   // try - catch?
     }
 
-    switch (userInput) {
+    switch (input) {
         case "rock":
             userChoice = "Rock";
             break;
@@ -49,40 +60,30 @@ function checkUserChoice(userInput) {
     }
 };
 
-console.log(`User's choice: ${userChoice}`);
-
-// compare the 2 /////////////////////////////////////
-// keep track of scores
-let computerScore = 0;
-let userScore = 0;
-
-function playRound(user, pc) {
-    if (pc === "Rock" && user === "Paper"
+// compare choices, increment scores /////////////////
+// show result of comparison (including boths choices)
+function compareChoices(user, pc) {
+    if (pc === "Rock" && user === "Paper"                 // user wins
         || pc === "Paper" && user === "Scissors"
         || pc === "Scissors" && user === "Rock"
     ) {
-        // user wins
         alert(`You won!\n${user} beats ${pc}.`);
         userScore++;
-    } else if (user === "Rock" && pc === "Paper"
+    } else if (user === "Rock" && pc === "Paper"          // pc wins
         || user === "Paper" && pc === "Scissors"
         || user === "Scissors" && pc === "Rock"
     ) {
-        // pc wins
         alert(`Computer won!\n${pc} beats ${user}.`);
         computerScore++;
-    } else if (user === pc) {
-        // draw
+    } else if (user === pc) {                               // draw
         alert(`That was a draw.\nYou both choose ${user}.`);
     } else {
         console.warn("nobody won and no draw?\nprobably user canned");
     }
-
-    // alert score?
 };
 
-playRound(userChoice, computerChoice);
-
-// show result ///////////////////////////////////////
-// show result of comparison (including boths choices)
 // show score
+function showScore() {
+    alert(`Computer: ${computerScore}\nYou: ${userScore}`);
+    console.log(`Computer: ${computerScore}\nYou: ${userScore}`);
+}
