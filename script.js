@@ -4,7 +4,10 @@ let userChoice = "";
 let computerScore = 0;
 let userScore = 0;
 
-playRound();
+const playButton = document.querySelector("#playButton");
+const resetButton = document.querySelector("#resetButton");
+playButton.addEventListener("click", playRound);
+resetButton.addEventListener("click", resetGame);
 
 function playRound() {
     computerChoice = getRandomChoice();
@@ -17,7 +20,15 @@ function playRound() {
     compareChoices(userChoice, computerChoice);
 
     showScore();
-}
+};
+
+function resetGame() {
+    computerChoice = "";
+    userChoice = "";
+    computerScore = 0;
+    userScore = 0;
+    console.info("game reset")
+};
 
 // RANDOM choice /////////////////////////////////////
 function getRandomChoice() {
