@@ -22,6 +22,7 @@ let userChoice = prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
 userChoice != null ? getUserChoice(userChoice): console.warn("user canceled");
 
 function getUserChoice(userInput) {
+    userInput = userInput.replace(" ", "");
     userInput.toLowerCase();
     while (userInput != "rock"
         && userInput != "paper"
