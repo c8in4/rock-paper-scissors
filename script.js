@@ -33,10 +33,13 @@ function getUserChoice(userInput) {
     switch (userInput) {
         case "rock":
             userChoice = "Rock";
+            break;
         case "paper":
             userChoice = "Paper";
+            break;
         case "scissors":
             userChoice = "Scissors";
+            break;
     }
 };
 
