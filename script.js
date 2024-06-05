@@ -28,6 +28,7 @@ function resetGame() {
     computerScore = 0;
     userScore = 0;
     console.info("game reset")
+    alert(`Scores have been reset.\n\nComputer: ${computerScore}\nYou: ${userScore}`);
 };
 
 // RANDOM choice /////////////////////////////////////
