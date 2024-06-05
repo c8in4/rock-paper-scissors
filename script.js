@@ -10,7 +10,7 @@ playButton.addEventListener("click", playGame);
 resetButton.addEventListener("click", resetGame);
 
 function playGame() {
-    for (i = 0; i <= 5; i++) {
+    for (i = 0; i < 5; i++) {
         playRound();
     }
 };
@@ -37,7 +37,7 @@ function resetGame() {
     alert(`Scores have been reset.\n\nComputer: ${computerScore}\nYou: ${userScore}`);
 };
 
-// RANDOM choice /////////////////////////////////////
+// to generate computers choice
 function getRandomChoice() {
     switch (Math.floor(Math.random() * 3)) {
         case 0:
@@ -49,12 +49,12 @@ function getRandomChoice() {
     }
 };
 
-// get user input ///////////////////////////////////
 function getUserChoice() {
     return prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
 }
 
 function checkUserChoice(input) {
+    // makes user input easier to compare
     input = input.replaceAll(" ", "").toLowerCase();        // try - catch?
 
     while (input != "rock"
@@ -65,6 +65,7 @@ function checkUserChoice(input) {
         input = input.replaceAll(" ", "").toLowerCase();   // try - catch?
     }
 
+    // makes userChoice usable for generating outputs
     switch (input) {
         case "rock":
             userChoice = "Rock";
@@ -78,8 +79,6 @@ function checkUserChoice(input) {
     }
 };
 
-// compare choices, increment scores /////////////////
-// show result of comparison (including boths choices)
 function compareChoices(user, pc) {
     if (pc === "Rock" && user === "Paper"                 // user wins
         || pc === "Paper" && user === "Scissors"
@@ -100,7 +99,6 @@ function compareChoices(user, pc) {
     }
 };
 
-// show score
 function showScore() {
     alert(`Computer: ${computerScore}\nYou: ${userScore}`);
     console.log(`Computer: ${computerScore}\nYou: ${userScore}`);
