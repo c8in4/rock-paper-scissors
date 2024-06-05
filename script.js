@@ -6,8 +6,14 @@ let userScore = 0;
 
 const playButton = document.querySelector("#playButton");
 const resetButton = document.querySelector("#resetButton");
-playButton.addEventListener("click", playRound);
+playButton.addEventListener("click", playGame);
 resetButton.addEventListener("click", resetGame);
+
+function playGame() {
+    for (i = 0; i <= 5; i++) {
+        playRound();
+    }
+};
 
 function playRound() {
     computerChoice = getRandomChoice();
