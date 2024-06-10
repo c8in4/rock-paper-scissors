@@ -33,4 +33,8 @@ main {
     height: 10rem;
 }
 
-/* outline: 1px solid red; */
+.text-align-center {
+    text-align: center;
+}
+
+outline: 1px solid red;

@@ -5,7 +5,10 @@ let computerScore = 0;
 let userScore = 0;
 
 const buttons = document.querySelector("#buttons");
-const scoreBoard = document.querySelector("#scores");
+const roundInfo = document.querySelector("#info");
+const computerScoreText = document.querySelector("#computerScoreText");
+const userScoreText = document.querySelector("#userScoreText");
+
 
 buttons.addEventListener("click", (event) => {
     let choice = event.target.name;
@@ -32,7 +35,9 @@ function resetGame() {
     userChoice = "";
     computerScore = 0;
     userScore = 0;
-    scoreBoard.innerText = `Computer: ${computerScore}\nYou: ${userScore}`;
+    roundInfo.textContent = "Click one of the buttons to make your choice.";
+    computerScoreText.innerText = computerScore;
+    userScoreText.innerText = userScore;
     console.info("game reset")
     alert(`Scores have been reset.`);
 };
@@ -64,7 +69,7 @@ function compareChoices(user, pc) {
         message = `Computer won!\n${pc} beats ${user}.`;
         computerScore++;
     } else if (user === pc) {                               // draw
-        message = `That was a draw.\nYou both choose ${user}.`;
+        message = `That was a draw.\nYou both chose ${user}.`;
     } else {
         console.warn("nobody won and no draw?\nprobably user canned");
     }
@@ -76,7 +81,9 @@ function showScore(msg) {
     console.log(`Computer: ${computerScore}\nYou: ${userScore}`);
 
     if (userScore < 5 && computerScore < 5) {
-        scoreBoard.innerText = `${msg}\n\nComputer: ${computerScore}\nYou: ${userScore}`;
+        roundInfo.innerText = msg;
+        computerScoreText.innerText = computerScore;
+        userScoreText.innerText = userScore;       
     } else {
         let winner = "";
         userScore === 5 ? winner = "You" : winner = "The Computer";
