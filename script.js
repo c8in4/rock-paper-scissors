@@ -4,28 +4,27 @@ let userChoice = "";
 let computerScore = 0;
 let userScore = 0;
 
-const playButton = document.querySelector("#playButton");
-const resetButton = document.querySelector("#resetButton");
-playButton.addEventListener("click", playGame);
-resetButton.addEventListener("click", resetGame);
+const buttons = document.querySelector("#buttons");
+const scoreBoard = document.querySelector("#scores");
 
-function playGame() {
-    for (i = 0; i < 5; i++) {
-        playRound();
+buttons.addEventListener("click", (event) => {
+    let choice = event.target.name;
+    if (choice === "Rock"
+        || choice === "Paper"
+        || choice === "Scissors"
+    ) {
+        playRound(choice);
     }
-};
+});
 
-function playRound() {
+function playRound(rpsButton) {
     computerChoice = getRandomChoice();
     console.log(`Computer's choice: ${computerChoice}`);
 
-    userChoice = getUserChoice();
-    checkUserChoice(userChoice);
+    userChoice = rpsButton;
     console.log(`User's choice: ${userChoice}`);
 
     compareChoices(userChoice, computerChoice);
-
-    showScore();
 };
 
 function resetGame() {
@@ -33,11 +32,11 @@ function resetGame() {
     userChoice = "";
     computerScore = 0;
     userScore = 0;
+    scoreBoard.innerText = `Computer: ${computerScore}\nYou: ${userScore}`;
     console.info("game reset")
-    alert(`Scores have been reset.\n\nComputer: ${computerScore}\nYou: ${userScore}`);
+    alert(`Scores have been reset.`);
 };
 
-// to generate computers choice
 function getRandomChoice() {
     switch (Math.floor(Math.random() * 3)) {
         case 0:
@@ -49,57 +48,39 @@ function getRandomChoice() {
     }
 };
 
-function getUserChoice() {
-    return prompt("Choose between 'Rock', 'Paper' and 'Scissors':");
-}
-
-function checkUserChoice(input) {
-    // makes user input easier to compare
-    input = input.replaceAll(" ", "").toLowerCase();        // try - catch?
-
-    while (input != "rock"
-        && input != "paper"
-        && input != "scissors"
-    ) {
-        input = prompt("Please choose from 'Rock', 'Paper' and 'Scissors' only.");
-        input = input.replaceAll(" ", "").toLowerCase();   // try - catch?
-    }
-
-    // makes userChoice usable for generating outputs
-    switch (input) {
-        case "rock":
-            userChoice = "Rock";
-            break;
-        case "paper":
-            userChoice = "Paper";
-            break;
-        case "scissors":
-            userChoice = "Scissors";
-            break;
-    }
-};
-
 function compareChoices(user, pc) {
+    let message = "";
+
     if (pc === "Rock" && user === "Paper"                 // user wins
         || pc === "Paper" && user === "Scissors"
         || pc === "Scissors" && user === "Rock"
     ) {
-        alert(`You won!\n${user} beats ${pc}.`);
+        message = `You won!\n${user} beats ${pc}.`;
         userScore++;
     } else if (user === "Rock" && pc === "Paper"          // pc wins
         || user === "Paper" && pc === "Scissors"
         || user === "Scissors" && pc === "Rock"
     ) {
-        alert(`Computer won!\n${pc} beats ${user}.`);
+        message = `Computer won!\n${pc} beats ${user}.`;
         computerScore++;
     } else if (user === pc) {                               // draw
-        alert(`That was a draw.\nYou both choose ${user}.`);
+        message = `That was a draw.\nYou both choose ${user}.`;
     } else {
         console.warn("nobody won and no draw?\nprobably user canned");
     }
+
+    showScore(message);
 };
 
-function showScore() {
-    alert(`Computer: ${computerScore}\nYou: ${userScore}`);
+function showScore(msg) {
     console.log(`Computer: ${computerScore}\nYou: ${userScore}`);
+
+    if (userScore < 5 && computerScore < 5) {
+        scoreBoard.innerText = `${msg}\n\nComputer: ${computerScore}\nYou: ${userScore}`;
+    } else {
+        let winner = "";
+        userScore === 5 ? winner = "You" : winner = "The Computer";
+        alert(`${winner} won 5 games.`)
+        resetGame();
+    }
 }
