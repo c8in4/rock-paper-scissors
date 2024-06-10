@@ -1,0 +1,36 @@
+:root {
+    --var-bgColor-primary: #333;
+    --var-txtColor-primary: #eee;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    background-color: var(--var-bgColor-primary);
+    color: var(--var-txtColor-primary);
+    margin: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    flex: 1;
+}
+
+.buttonsContainer > button {
+    width: 10rem;
+    height: 10rem;
+}
+
+/* outline: 1px solid red; */
