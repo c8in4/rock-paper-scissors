@@ -16,15 +16,15 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let humanChoice = ''
-    do {
-        humanChoice = prompt('Type in "Rock", "Paper" or "Scissors".')
-    }
-    while (!(capitalizeWord(humanChoice) == 'Rock' || 'Paper' || 'Scissors'))
+// function getHumanChoice() {
+//     let humanChoice = ''
+//     do {
+//         humanChoice = prompt('Type in "Rock", "Paper" or "Scissors".')
+//     }
+//     while (!(capitalizeWord(humanChoice) == 'Rock' || 'Paper' || 'Scissors'))
 
-    return capitalizeWord(humanChoice)
-}
+//     return capitalizeWord(humanChoice)
+// }
 
 function capitalizeWord(word) {
     const lowerCaseWord = word.toLowerCase()
@@ -55,17 +55,17 @@ function playRound(humanChoice = getHumanChoice(), computerChoice = getComputerC
         winner = 'Nobody'
     }
 
-    if (winner != 'Nobody') console.log(`${winner} won.`)
+    console.log(`${winner} won.`)
     return winner
 }
 
-function playGame() {
-    while (humanScore < 5 && computerScore < 5) {
-        playRound()
-        console.log(`Human: ${humanScore}\nComputer: ${computerScore}`)
-    }
-    finishGame()
-}
+// function playGame() {
+//     while (humanScore < 5 && computerScore < 5) {
+//         playRound()
+//         console.log(`Human: ${humanScore}\nComputer: ${computerScore}`)
+//     }
+//     finishGame()
+// }
 
 function finishGame() {
     if (humanScore == 5) {
@@ -81,3 +81,10 @@ function resetGame() {
     humanScore = 0
     computerScore = 0
 }
+
+const rpsButtonContainer = document.querySelector('#rpsButtonContainer')
+
+rpsButtonContainer.addEventListener('click', (event) => {
+    let humanChoice = capitalizeWord(event.target.id)
+    playRound(humanChoice)
+})
