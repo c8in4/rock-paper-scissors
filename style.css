@@ -1,8 +1,3 @@
-:root {
-    --var-bgColor-primary: #333;
-    --var-txtColor-primary: #eee;
-}
-
 *,
 *::before,
 *::after {
@@ -15,8 +10,6 @@ html {
 
 body {
     font-size: 1.6rem;
-    background-color: var(--var-bgColor-primary);
-    color: var(--var-txtColor-primary);
     margin: 0;
     height: 100dvh;
     display: flex;
@@ -36,5 +29,3 @@ main {
 .text-align-center {
     text-align: center;
 }
-
-outline: 1px solid red;
