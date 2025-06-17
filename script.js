@@ -56,6 +56,7 @@ function playRound(humanChoice = getHumanChoice(), computerChoice = getComputerC
     }
 
     console.log(`${winner} won.`)
+    updateOutputContainer(humanChoice, computerChoice)
     return winner
 }
 
@@ -88,3 +89,14 @@ rpsButtonContainer.addEventListener('click', (event) => {
     let humanChoice = capitalizeWord(event.target.id)
     playRound(humanChoice)
 })
+
+const outputContainer = document.querySelector('#outputContainer')
+const choicesPara = document.createElement('p')
+const scoresPara = document.createElement('p')
+
+function updateOutputContainer(humanChoice, computerChoice) {
+    choicesPara.innerText = `You chose: ${humanChoice}\nComputer chose: ${computerChoice}`
+    scoresPara.innerText = `Your score: ${humanScore}\nComputer's score: ${computerScore}`
+
+    outputContainer.append(choicesPara, scoresPara)
+}
