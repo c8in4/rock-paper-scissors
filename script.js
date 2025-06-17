@@ -56,21 +56,16 @@ function playRound(humanChoice = getHumanChoice(), computerChoice = getComputerC
     }
 
     console.log(`${winner} won.`)
+    console.log(`Human: ${humanScore}\nComputer: ${computerScore}`)
     updateOutputContainer(humanChoice, computerChoice)
+
+    if (humanScore >= 5 || computerScore >= 5) finishGame()
     return winner
 }
 
-// function playGame() {
-//     while (humanScore < 5 && computerScore < 5) {
-//         playRound()
-//         console.log(`Human: ${humanScore}\nComputer: ${computerScore}`)
-//     }
-//     finishGame()
-// }
-
 function finishGame() {
     if (humanScore == 5) {
-        alert(`Human won.`)
+        alert(`You won.`)
     }
     if (computerScore == 5) {
         alert(`Computer won.`)
@@ -81,6 +76,7 @@ function finishGame() {
 function resetGame() {
     humanScore = 0
     computerScore = 0
+    updateOutputContainer()
 }
 
 const rpsButtonContainer = document.querySelector('#rpsButtonContainer')
@@ -95,7 +91,12 @@ const choicesPara = document.createElement('p')
 const scoresPara = document.createElement('p')
 
 function updateOutputContainer(humanChoice, computerChoice) {
-    choicesPara.innerText = `You chose: ${humanChoice}\nComputer chose: ${computerChoice}`
+    if (humanChoice && computerChoice) {
+        choicesPara.innerText = `You chose: ${humanChoice}\nComputer chose: ${computerChoice}`
+    } else {
+        choicesPara.innerText = ''
+    }
+    
     scoresPara.innerText = `Your score: ${humanScore}\nComputer's score: ${computerScore}`
 
     outputContainer.append(choicesPara, scoresPara)
